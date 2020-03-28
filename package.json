@@ -1,0 +1,38 @@
+{
+  "name": "reusable-typescript",
+  "version": "1.0.0",
+  "description": "All the things...",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SemteulGaram/ReusableTypescript.git"
+  },
+  "keywords": [
+    "reusable",
+    "typescript"
+  ],
+  "author": "SemteulGaram",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SemteulGaram/ReusableTypescript/issues"
+  },
+  "homepage": "https://github.com/SemteulGaram/ReusableTypescript#readme",
+  "devDependencies": {
+    "@types/node": "^13.9.5",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@types/socket.io": "^2.1.4",
+    "axios": "^0.19.2",
+    "chalk": "^3.0.0",
+    "deepmerge": "^4.2.2",
+    "json-beautify": "^1.1.1",
+    "knex": "^0.20.13",
+    "socket.io": "^2.3.0"
+  }
+}
