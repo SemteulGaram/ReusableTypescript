@@ -1,6 +1,6 @@
 /**
  * @module reusable/ManagerLogger/ExampleLogger
- * @see ./reusable/manager-logger.ts
+ * @see ./reusable/ManagerLogger.ts
  */
 
 export * from './reusable/ManagerLogger'
