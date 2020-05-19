@@ -9,53 +9,53 @@
  * @todo
  */
 
-import fs from 'fs';
+import fs from 'fs'
 
 import deepmerge from 'deepmerge'
-import jsonBeautify from 'json-beautify';
+import jsonBeautify from 'json-beautify'
 
-import { instance as ManagerLogger } from '../ManagerLogger';
+import { instance as ManagerLogger } from '../ManagerLogger'
 import { ExtendError } from '../utils/ExtendError'
 
-const logger = ManagerLogger.createLogger('Config');
+const logger = ManagerLogger.createLogger('Config')
 
 export interface ISchema {
-  example: string;
-};
+  example: string
+}
 
 export const DEFAULT_CONFIG: ISchema = {
   example: 'THIS IS EXAMPLE CONFIG'
-};
+}
 
 export class ManagerConfig {
-  path: string;
-  private _config: ISchema|null;
+  path: string
+  private _config: ISchema|null
 
   constructor (path: string) {
-    this.path = path;
+    this.path = path
     this._config = null
   }
 
   get isReady(): boolean {
-    return !!this._config;
+    return !!this._config
   }
 
   get config(): ISchema {
-    if (!this._config) throw new ExtendError('{ManagerConfig}.init() before use config', 'ERR_NOT_INIT');
-    return this._config;
+    if (!this._config) throw new ExtendError('{ManagerConfig}.init() before use config', 'ERR_NOT_INIT')
+    return this._config
   }
 
   async init(): Promise<ManagerConfig> {
     try {
-      await this.reload();
-      await this.save();
+      await this.reload()
+      await this.save()
     } catch (err) {
 
       if (err.code === 'ENOENT') {
-        logger.debug('Config not found. Create one...');
-        await this._createConfig();
-        await this.reload();
-        await this.save();
+        logger.debug('Config not found. Create one...')
+        await this._createConfig()
+        await this.reload()
+        await this.save()
       } else {
         throw err;
       }
