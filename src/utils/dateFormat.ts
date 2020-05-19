@@ -1,8 +1,8 @@
 /**
- * @module utils/DateFormat
- * Error with err.code
+ * @module utils/dateFormat
+ * Date formatter
  * 
- * @version 1.0
+ * @version 1.1
  * @since 2020-04-04
  */
 
@@ -10,30 +10,25 @@
  * Date format to YYYY-MM-DD
  * 
  * @param {Date} date
+ * @param {string} separator - default: '-'
  * @return {string}
  */
-export function dateYYYY_MM_DD (date: Date): string {
-  return `${
-    date.getFullYear().toString().padStart(4, '0')
-  }-${
-    (date.getMonth()+1).toString().padStart(2, '0')
-  }-${
-    date.getDate().toString().padStart(2, '0')
-  }`
+export function dateYYYY_MM_DD (date: Date, separator: string = '-'): string {
+  return date.getFullYear().toString().padStart(4, '0') + separator
+    + (date.getMonth()+1).toString().padStart(2, '0') + separator
+    + date.getDate().toString().padStart(2, '0')
 }
 
 /**
  * Date format to MM-DD
  * 
  * @param {Date} date
+ * @param {string} separator - default: '-'
  * @return {string}
  */
-export function dateMM_DD (date: Date): string {
-  return `${
-    (date.getMonth()+1).toString().padStart(2, '0')
-  }-${
-    date.getDate().toString().padStart(2, '0')
-  }`
+export function dateMM_DD (date: Date, separator: string = '-'): string {
+  return (date.getMonth()+1).toString().padStart(2, '0') + separator
+    + date.getDate().toString().padStart(2, '0')
 }
 
 /**

@@ -1,8 +1,8 @@
 /**
  * @module reusable/ManagerConfig
  * Integrated config management
- * 
- * @version 1.0
+ *
+ * @version 1.1
  * @since 2020-03-29
  * @dependency deepmerge
  * @dependency json-beautify
@@ -14,10 +14,10 @@ import fs from 'fs';
 import deepmerge from 'deepmerge'
 import jsonBeautify from 'json-beautify';
 
-import { instance as manacronLogger } from '../ManagerLogger';
+import { instance as ManagerLogger } from '../ManagerLogger';
 import { ExtendError } from '../utils/ExtendError'
 
-const logger = manacronLogger.createLogger('Config');
+const logger = ManagerLogger.createLogger('Config');
 
 export interface ISchema {
   example: string;
