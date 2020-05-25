@@ -1,14 +1,14 @@
 /**
  * @module utils/dateFormat
  * Date formatter
- * 
- * @version 1.1
+ *
+ * @version 1.2
  * @since 2020-04-04
  */
 
 /**
  * Date format to YYYY-MM-DD
- * 
+ *
  * @param {Date} date
  * @param {string} separator - default: '-'
  * @return {string}
@@ -20,8 +20,21 @@ export function dateYYYY_MM_DD (date: Date, separator: string = '-'): string {
 }
 
 /**
+ * Date format to YY-MM-DD
+ *
+ * @param {Date} date
+ * @param {string} separator - default: '-'
+ * @return {string}
+ */
+export function dateYY_MM_DD (date: Date, separator: string = '-'): string {
+  return date.getFullYear().toString().padStart(4, '0').substring(2) + separator
+    + (date.getMonth()+1).toString().padStart(2, '0') + separator
+    + date.getDate().toString().padStart(2, '0')
+}
+
+/**
  * Date format to MM-DD
- * 
+ *
  * @param {Date} date
  * @param {string} separator - default: '-'
  * @return {string}
@@ -33,7 +46,7 @@ export function dateMM_DD (date: Date, separator: string = '-'): string {
 
 /**
  * Date format to Y년 M월 D일
- * 
+ *
  * @param {Date} date
  * @return {string}
  */
@@ -43,7 +56,7 @@ export function dateKR_YMD (date: Date): string {
 
 /**
  * Date format to M월 D일
- * 
+ *
  * @param {Date} date
  * @return {string}
  */
