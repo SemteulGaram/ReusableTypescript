@@ -2,7 +2,7 @@
  * @module dom/HandleScroll
  * React Scroll event handler
  *
- * @version 1.0
+ * @version 1.1
  * @since 2020-05-28
  * @dependency React
  */
@@ -15,7 +15,7 @@ export class HandleScroll {
   handlers: {
     [key in string]: {
       lastScrollTop: number|null,
-      callback: (scrollTop: number, diff: number) => void,
+      callback: (scrollTop: number, diff: number, element: Element) => void,
       immediate: boolean
     }
   }
@@ -51,7 +51,7 @@ export class HandleScroll {
 
   get isMount (): boolean { return this._isMount }
 
-  addScrollListener (singleSelector: string, callback: (scrollTop: number, diff: number) => void, immediate?: boolean): void {
+  addScrollListener (singleSelector: string, callback: (scrollTop: number, diff: number, element: Element) => void, immediate?: boolean): void {
     this.handlers[singleSelector] = {
       lastScrollTop: null,
       callback,
@@ -94,9 +94,9 @@ export class HandleScroll {
 
     // LastScrollTop
     if (lastScrollTop === null) {
-      this.handlers[selector].callback(newScrollTop, 0)
+      this.handlers[selector].callback(newScrollTop, 0, element)
     } else {
-      this.handlers[selector].callback(newScrollTop, newScrollTop - lastScrollTop)
+      this.handlers[selector].callback(newScrollTop, newScrollTop - lastScrollTop, element)
     }
 
     this.handlers[selector].lastScrollTop = newScrollTop
