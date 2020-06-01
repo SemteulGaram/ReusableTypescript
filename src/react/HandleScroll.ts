@@ -1,5 +1,5 @@
 /**
- * @module dom/HandleScroll
+ * @module react/components/HandleScroll
  * React Scroll event handler
  *
  * @version 1.1
