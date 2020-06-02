@@ -12,8 +12,6 @@
 import { jsx, Interpolation } from '@emotion/core'
 import React from 'react'
 
-import { unsafeShortUuidV4 } from '../../utils/uuidUnsafe'
-
 type Props = {
   offsetY?: number
   reverseOffsetY?: number
@@ -22,16 +20,20 @@ type Props = {
 }
 type State = {
   uidClass: string
+  effectActive: boolean
 }
 
 class ScrollEffect extends React.Component<Props, State> {
   _bindedOnScroll: () => void
 
+  static _uidCount = 0
+
   constructor (props: Readonly<Props>) {
     super(props)
 
     this.state = {
-      uidClass: 'scroll_effect--' + unsafeShortUuidV4()
+      uidClass: 'scroll_effect--' + ScrollEffect._uidCount++,
+      effectActive: false,
     }
     this._bindedOnScroll = this.onScroll.bind(this)
   }
@@ -47,15 +49,33 @@ class ScrollEffect extends React.Component<Props, State> {
       return
     }
 
-    html.scrollTop
+    // offset
+    //     +     (top+, bottom+)
+    // ┌─0─┐top
+    // │  -  │
+    // │     │ (top-, bottom+) (active state)
+    // │  +  │
+    // └─0─┘bottom
+    //     -     (top-, bottom-)
     const rect = element.getBoundingClientRect()
-    const isTopExpose = rect.top
-    console.log(isTopExpose)
+    const topOffset = rect.top + (this.props.offsetY || 0)
+    const bottomOffset = rect.top + rect.height + (this.props.reverseOffsetY || 0)
+
+    if (topOffset <= 0 && bottomOffset >= 0) {
+      if (!this.state.effectActive) this.setState({
+        effectActive: true
+      })
+    } else {
+      if (this.state.effectActive) this.setState({
+        effectActive: false
+      })
+    }
   }
 
   componentDidMount (): void {
     try { window } catch (_) { return }
     window.addEventListener('scroll', this._bindedOnScroll)
+    this._bindedOnScroll() // Ensure
   }
 
   componentWillUnmount (): void {
@@ -64,7 +84,11 @@ class ScrollEffect extends React.Component<Props, State> {
   }
 
   render (): React.ReactElement {
-    return (<div className={ 'scroll_effect ' + this.state.uidClass }>
+    return (<div className={ 'scroll_effect ' + this.state.uidClass } css={
+      this.state.effectActive
+        ? [this.props.cssBefore, this.props.cssAfter]
+        : this.props.cssBefore
+    }>
       { this.props.children }
     </div>)
   }
