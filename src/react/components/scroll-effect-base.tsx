@@ -58,7 +58,7 @@ class ScrollEffect extends React.Component<Props, State> {
     // └─0─┘bottom
     //     -     (top-, bottom-)
     const rect = element.getBoundingClientRect()
-    const topOffset = rect.top + (this.props.offsetY || 0)
+    const topOffset = rect.top + (this.props.offsetY || 0) - window.innerHeight
     const bottomOffset = rect.top + rect.height + (this.props.reverseOffsetY || 0)
 
     if (topOffset <= 0 && bottomOffset >= 0) {

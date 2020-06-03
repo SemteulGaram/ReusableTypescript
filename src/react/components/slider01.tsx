@@ -3,11 +3,10 @@
  * @module react/components/slider01
  * Image slider style 01
  *
- * @version 1.0
+ * @version 1.1
  * @since 2020-06-01
  * @dependency React
  * @dependency @emotion/core
- * @TODO Make some property to expose api
  */
 import { jsx, Interpolation } from '@emotion/core'
 import React, { ReactElement } from 'react'
@@ -15,6 +14,7 @@ import React, { ReactElement } from 'react'
 type Slider01Props = {
   sliderSpeed?: number
   imgSrcs: string[]
+  additionalCss?: Interpolation|Interpolation[]
 }
 
 type Slider01State = {
@@ -133,14 +133,14 @@ class Slider01 extends React.Component<Slider01Props, Slider01State> {
   }
 
   render (): React.ReactElement {
-    return (<div className='slider01' css={{
+    return (<div className='slider01' css={[{
       position: 'relative',
       width: '100%',
       height: '100%',
 
       display: 'flex',
       flexDirection: 'column',
-    }}>
+    }, this.props.additionalCss || {}]}>
       <div className='slider01__imgs' css={{
         position: 'relative',
 
